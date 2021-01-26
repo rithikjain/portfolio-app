@@ -14,10 +14,8 @@ import com.github.florent37.viewanimator.ViewAnimator
 import com.rithikjain.portfolio.databinding.ActivityLandingBinding
 import kotlin.math.atan2
 
-open class LandingActivity : AppCompatActivity(), SensorEventListener {
+open class LandingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLandingBinding
-    private lateinit var sensorManager: SensorManager
-    private var gravSensorVals: FloatArray = FloatArray(10)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,59 +23,10 @@ open class LandingActivity : AppCompatActivity(), SensorEventListener {
         val view = binding.root
         setContentView(view)
 
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-
         binding.introTextWriter.apply {
             setWithMusic(false)
             animateText("Hey! I'm Rithik Jain.")
             setTypeWriterListener(IntroTextListener(binding))
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        sensorManager.unregisterListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { accelerometer ->
-            sensorManager.registerListener(
-                this,
-                accelerometer,
-                SensorManager.SENSOR_DELAY_GAME,
-                SensorManager.SENSOR_DELAY_GAME
-            )
-        }
-    }
-
-    private val alpha = 0.1f
-    private fun lowPass(input: FloatArray, output: FloatArray?): FloatArray {
-        if (output == null) return input
-
-        for (i in input.indices) {
-            output[i] = output[i] + alpha * (input[i] - output[i])
-        }
-        return output
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
-
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
-            gravSensorVals = lowPass(event.values!!.clone(), gravSensorVals)
-        }
-
-        val x = gravSensorVals[0]
-        val y = gravSensorVals[1]
-
-        val degreeRotation = atan2(x,y)
-
-        val rotation = Math.toDegrees(degreeRotation.toDouble())
-
-        if (rotation > -15 && rotation < 15) {
-            // Handle rotation here
         }
     }
 
