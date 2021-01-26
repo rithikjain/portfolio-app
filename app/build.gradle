@@ -45,6 +45,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
 
     implementation 'in.codeshuffle:typewriterview:1.1.0'
+    implementation 'com.github.florent37:viewanimator:1.1.2'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
