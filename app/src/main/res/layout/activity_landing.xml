@@ -2,32 +2,45 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/landingLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/landing_bg"
     tools:context=".ui.landing.LandingActivity">
 
-    <in.codeshuffle.typewriterview.TypeWriterView
-        android:id="@+id/introTextWriter"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="64dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:textColor="@color/blue"/>
+        app:layout_constraintBottom_toTopOf="@id/centerGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="18dp">
 
-    <in.codeshuffle.typewriterview.TypeWriterView
-        android:id="@+id/descriptionTextWriter"
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/introTextWriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/descriptionTextWriter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:textColor="@color/white"
+            android:visibility="invisible"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/centerGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/introTextWriter"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="18dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
