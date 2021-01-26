@@ -1,7 +1,9 @@
 package com.rithikjain.portfolio.ui.landing
 
 import `in`.codeshuffle.typewriterview.TypeWriterListener
+import android.app.ActivityOptions
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -12,6 +14,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.github.florent37.viewanimator.ViewAnimator
 import com.rithikjain.portfolio.databinding.ActivityLandingBinding
+import com.rithikjain.portfolio.ui.container.ContainerActivity
 import kotlin.math.atan2
 
 open class LandingActivity : AppCompatActivity() {
@@ -27,6 +30,11 @@ open class LandingActivity : AppCompatActivity() {
             setWithMusic(false)
             animateText("Hey! I'm Rithik Jain.")
             setTypeWriterListener(IntroTextListener(binding))
+        }
+
+        binding.findMoreAbout.setOnClickListener {
+            val intent = Intent(this, ContainerActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
         }
     }
 
@@ -45,7 +53,8 @@ open class LandingActivity : AppCompatActivity() {
         }
     }
 
-    class DescriptionTextListener(private val binding: ActivityLandingBinding) : TypeWriterListener {
+    class DescriptionTextListener(private val binding: ActivityLandingBinding) :
+        TypeWriterListener {
         override fun onTypingStart(text: String?) {}
         override fun onCharacterTyped(text: String?, position: Int) {}
         override fun onTypingRemoved(text: String?) {}

@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Portfolio">
+        <activity android:name=".ui.container.ContainerActivity"></activity>
         <activity android:name=".ui.landing.LandingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
